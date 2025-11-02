@@ -52,6 +52,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
+          cache-dependency-path: 'backend/requirements/*.txt'
       
       - name: Install dependencies
         working-directory: ./backend
@@ -129,7 +130,7 @@ jobs:
       
       - name: Run ESLint
         working-directory: ./frontend
-        run: npm run lint
+        run: npm run lint -- --max-warnings 10
       
       - name: Run TypeScript type checking
         working-directory: ./frontend
