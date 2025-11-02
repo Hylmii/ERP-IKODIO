@@ -36,8 +36,11 @@ export default function LoginPage() {
       setAuth(response.user, response.tokens)
       toast.success(`Welcome back, ${response.user.full_name}!`)
       navigate('/')
-    } catch (error: any) {
-      toast.error(error.response?.data?.error?.message || 'Login failed. Please try again.')
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error && 'response' in error 
+        ? (error as { response?: { data?: { error?: { message?: string } } } }).response?.data?.error?.message 
+        : 'Login failed. Please try again.'
+      toast.error(errorMessage || 'Login failed. Please try again.')
     } finally {
       setIsLoading(false)
     }

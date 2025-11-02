@@ -51,7 +51,7 @@ export default function EmployeesPage() {
   }
 
   const getStatusBadge = (status: EmployeeStatus) => {
-    const statusConfig: Record<EmployeeStatus, { variant: any; label: string }> = {
+    const statusConfig: Record<EmployeeStatus, { variant: 'success' | 'default' | 'warning' | 'danger'; label: string }> = {
       [EmployeeStatus.ACTIVE]: { variant: 'success', label: 'Active' },
       [EmployeeStatus.INACTIVE]: { variant: 'default', label: 'Inactive' },
       [EmployeeStatus.ON_LEAVE]: { variant: 'warning', label: 'On Leave' },

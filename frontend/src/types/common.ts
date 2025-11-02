@@ -1,10 +1,10 @@
 // Base API Response Types
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean
   data?: T
   error?: {
     message: string
-    details?: Record<string, any>
+    details?: Record<string, string | number | boolean>
   }
   meta?: {
     total_items?: number

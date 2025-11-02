@@ -81,7 +81,7 @@ export default function Table<T>({
                 >
                   {column.render
                     ? column.render(item)
-                    : (item as any)[column.key]?.toString() || '-'}
+                    : (item as Record<string, unknown>)[column.key]?.toString() || '-'}
                 </td>
               ))}
             </tr>

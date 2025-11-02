@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { classNames } from '@utils/helpers'
-import { motion } from 'framer-motion'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'ghost'
 export type ButtonSize = 'sm' | 'md' | 'lg'
@@ -48,9 +47,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <motion.button
+      <button
         ref={ref}
-        whileTap={{ scale: 0.98 }}
         className={classNames(
           baseClasses,
           variantClasses[variant],
@@ -92,7 +90,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
           </>
         )}
-      </motion.button>
+      </button>
     )
   }
 )
