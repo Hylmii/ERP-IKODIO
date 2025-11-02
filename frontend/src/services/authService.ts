@@ -1,5 +1,5 @@
 import api from './api'
-import { LoginCredentials, LoginResponse, User } from '@types/common'
+import { LoginCredentials, LoginResponse, User } from '@/types/common'
 
 export const authService = {
   // Login

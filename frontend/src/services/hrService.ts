@@ -1,6 +1,6 @@
 import api from './api'
-import { Employee, Attendance, Payroll, Leave } from '@types/hr'
-import { PaginatedResponse, PaginationParams } from '@types/common'
+import { Employee, Attendance, Payroll, Leave } from '@/types/hr'
+import { PaginatedResponse, PaginationParams } from '@/types/common'
 
 export const hrService = {
   // Employees

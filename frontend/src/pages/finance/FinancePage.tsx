@@ -1,4 +1,4 @@
-import { Card, Badge } from '@components/common'
+import { Card } from '@components/common'
 import { FiDollarSign, FiTrendingUp, FiTrendingDown, FiPieChart } from 'react-icons/fi'
 import { formatCurrency } from '@utils/helpers'
 
