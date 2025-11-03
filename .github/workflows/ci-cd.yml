@@ -136,9 +136,10 @@ jobs:
         working-directory: ./frontend
         run: npx tsc --noEmit
       
-      - name: Run tests
-        working-directory: ./frontend
-        run: npm run test -- --coverage
+      # Commented out until test script is added
+      # - name: Run tests
+      #   working-directory: ./frontend
+      #   run: npm run test -- --coverage
       
       - name: Build production
         working-directory: ./frontend
