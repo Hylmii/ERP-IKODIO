@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { authService } from '@services/authService'
 import { useAuthStore } from '@store/authStore'
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
+import api from '@services/api'
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -20,6 +21,22 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const { setAuth } = useAuthStore()
+
+  // Fetch CSRF token on component mount
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        // Use axios directly to avoid error interceptor toast
+        await api.get('/auth/csrf/', { 
+          headers: { 'X-Skip-Error-Toast': 'true' } 
+        })
+      } catch (error) {
+        // Silently fail - CSRF token will be set when it's fetched successfully
+        console.debug('CSRF token fetch (initial attempt):', error)
+      }
+    }
+    fetchCsrfToken()
+  }, [])
 
   const {
     register,

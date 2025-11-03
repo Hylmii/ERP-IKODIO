@@ -3,18 +3,48 @@ import { AuditFields, User } from './common'
 // Employee Types
 export interface Employee extends AuditFields {
   id: string
-  employee_code: string
-  user: User
-  department: Department
-  position: Position
-  employment_type: EmploymentType
+  employee_id: string  // Changed from employee_code to match API
+  full_name: string  // Added from API response
+  user_email: string  // Added from API response
+  department_name: string  // Changed from nested to flat
+  position_title: string  // Changed from nested to flat
+  employment_type: string
+  employment_status: string  // Changed from status to match API
   join_date: string
-  resignation_date?: string
-  salary: number
-  status: EmployeeStatus
-  skills: string[]
-  emergency_contact: EmergencyContact
-  documents: EmployeeDocument[]
+  photo?: string | null
+  // Optional fields from detailed view
+  user?: number
+  department?: number
+  position?: number
+  first_name?: string
+  last_name?: string
+  email?: string
+  phone?: string
+  mobile?: string
+  date_of_birth?: string
+  gender?: string
+  marital_status?: string
+  nationality?: string
+  id_card_number?: string
+  tax_id?: string
+  passport_number?: string
+  address?: string
+  city?: string
+  province?: string
+  postal_code?: string
+  probation_end_date?: string
+  contract_end_date?: string
+  resign_date?: string
+  base_salary?: number
+  bank_name?: string
+  bank_account_number?: string
+  bank_account_holder?: string
+  emergency_contact_name?: string
+  emergency_contact_phone?: string
+  emergency_contact_relationship?: string
+  reporting_to?: number
+  manager_name?: string | null
+  notes?: string
 }
 
 export interface Department {

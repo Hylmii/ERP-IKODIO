@@ -4,7 +4,6 @@ import { Card, Button, Input, Table, Badge, Modal, Pagination, LoadingContent } 
 import { FiPlus, FiSearch, FiEdit, FiTrash2, FiMail, FiPhone, FiUser } from 'react-icons/fi'
 import { hrService } from '@services/hrService'
 import type { Employee } from '@/types/hr'
-import { EmployeeStatus } from '@/types/hr'
 import { formatDate } from '@utils/helpers'
 import toast from 'react-hot-toast'
 
@@ -50,48 +49,51 @@ export default function EmployeesPage() {
     }
   }
 
-  const getStatusBadge = (status: EmployeeStatus) => {
-    const statusConfig: Record<EmployeeStatus, { variant: 'success' | 'default' | 'warning' | 'danger'; label: string }> = {
-      [EmployeeStatus.ACTIVE]: { variant: 'success', label: 'Active' },
-      [EmployeeStatus.INACTIVE]: { variant: 'default', label: 'Inactive' },
-      [EmployeeStatus.ON_LEAVE]: { variant: 'warning', label: 'On Leave' },
-      [EmployeeStatus.TERMINATED]: { variant: 'danger', label: 'Terminated' },
+  const getStatusBadge = (status: string) => {
+    const statusConfig: Record<string, { variant: 'success' | 'default' | 'warning' | 'danger'; label: string }> = {
+      'active': { variant: 'success', label: 'Active' },
+      'inactive': { variant: 'default', label: 'Inactive' },
+      'on_leave': { variant: 'warning', label: 'On Leave' },
+      'terminated': { variant: 'danger', label: 'Terminated' },
     }
 
-    const config = statusConfig[status]
+    const config = statusConfig[status] || statusConfig['inactive']
     return <Badge variant={config.variant}>{config.label}</Badge>
   }
 
   const columns = [
     {
-      key: 'employee_code',
+      key: 'employee_id',
       header: 'Employee ID',
       render: (item: Employee) => (
-        <div className="font-medium text-gray-900">{item.employee_code}</div>
+        <div className="font-medium text-gray-900">{item.employee_id}</div>
       ),
     },
     {
-      key: 'user',
+      key: 'full_name',
       header: 'Name',
-      render: (item: Employee) => (
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-semibold">
-            {item.user.first_name[0]}{item.user.last_name[0]}
+      render: (item: Employee) => {
+        const initials = item.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
+        return (
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-semibold">
+              {initials}
+            </div>
+            <div>
+              <div className="font-medium text-gray-900">{item.full_name}</div>
+              <div className="text-sm text-gray-500">{item.user_email}</div>
+            </div>
           </div>
-          <div>
-            <div className="font-medium text-gray-900">{item.user.full_name}</div>
-            <div className="text-sm text-gray-500">{item.user.email}</div>
-          </div>
-        </div>
-      ),
+        )
+      },
     },
     {
       key: 'department',
       header: 'Department',
       render: (item: Employee) => (
         <div>
-          <div className="text-gray-900">{item.department.name}</div>
-          <div className="text-sm text-gray-500">{item.position.title}</div>
+          <div className="text-gray-900">{item.department_name}</div>
+          <div className="text-sm text-gray-500">{item.position_title}</div>
         </div>
       ),
     },
@@ -99,7 +101,9 @@ export default function EmployeesPage() {
       key: 'employment_type',
       header: 'Type',
       render: (item: Employee) => (
-        <Badge variant="default">{item.employment_type.replace('_', ' ')}</Badge>
+        <Badge variant="default">
+          {item.employment_type ? item.employment_type.replace(/_/g, ' ') : 'N/A'}
+        </Badge>
       ),
     },
     {
@@ -110,7 +114,7 @@ export default function EmployeesPage() {
     {
       key: 'status',
       header: 'Status',
-      render: (item: Employee) => getStatusBadge(item.status),
+      render: (item: Employee) => getStatusBadge(item.employment_status),
     },
     {
       key: 'actions',
@@ -182,7 +186,7 @@ export default function EmployeesPage() {
             <div>
               <p className="text-sm text-gray-600">Active</p>
               <p className="text-xl font-bold text-gray-900">
-                {data?.results.filter((e: Employee) => e.status === EmployeeStatus.ACTIVE).length || 0}
+                {data?.results.filter((e: Employee) => e.employment_status === 'active').length || 0}
               </p>
             </div>
           </div>
@@ -195,7 +199,7 @@ export default function EmployeesPage() {
             <div>
               <p className="text-sm text-gray-600">On Leave</p>
               <p className="text-xl font-bold text-gray-900">
-                {data?.results.filter((e: Employee) => e.status === EmployeeStatus.ON_LEAVE).length || 0}
+                {data?.results.filter((e: Employee) => e.employment_status === 'on_leave').length || 0}
               </p>
             </div>
           </div>
@@ -208,7 +212,7 @@ export default function EmployeesPage() {
             <div>
               <p className="text-sm text-gray-600">Inactive</p>
               <p className="text-xl font-bold text-gray-900">
-                {data?.results.filter((e: Employee) => e.status === EmployeeStatus.INACTIVE).length || 0}
+                {data?.results.filter((e: Employee) => e.employment_status === 'inactive').length || 0}
               </p>
             </div>
           </div>

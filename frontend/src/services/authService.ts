@@ -5,7 +5,16 @@ export const authService = {
   // Login
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
     const response = await api.post('/auth/login/', credentials)
-    return response.data
+    // Transform backend response to match frontend expectation
+    // Backend returns: {access, refresh, user}
+    // Frontend expects: {tokens: {access, refresh}, user}
+    return {
+      user: response.data.user,
+      tokens: {
+        access: response.data.access,
+        refresh: response.data.refresh,
+      },
+    }
   },
 
   // Logout

@@ -23,6 +23,10 @@ import TasksPage from '@pages/project/TasksPage'
 // Finance Pages
 import FinancePage from '@pages/finance/FinancePage'
 import InvoicesPage from '@pages/finance/InvoicesPage'
+import ExpensesPage from '@pages/finance/ExpensesPage'
+import PaymentsPage from '@pages/finance/PaymentsPage'
+import BudgetPage from '@pages/finance/BudgetPage'
+import ReportsPage from '@pages/finance/ReportsPage'
 
 // CRM Pages
 import CRMPage from '@pages/crm/CRMPage'
@@ -81,6 +85,10 @@ function App() {
         {/* Finance Routes */}
         <Route path="/finance" element={<FinancePage />} />
         <Route path="/finance/invoices" element={<InvoicesPage />} />
+        <Route path="/finance/expenses" element={<ExpensesPage />} />
+        <Route path="/finance/payments" element={<PaymentsPage />} />
+        <Route path="/finance/budgets" element={<BudgetPage />} />
+        <Route path="/finance/reports" element={<ReportsPage />} />
         
         {/* CRM Routes */}
         <Route path="/crm" element={<CRMPage />} />

@@ -4,6 +4,14 @@ import toast from 'react-hot-toast'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1'
 
+// Helper function to get CSRF token from cookies
+function getCookie(name: string): string | null {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
+  return null
+}
+
 // Create axios instance
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -11,6 +19,7 @@ const api: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 30000,
+  withCredentials: true, // Send cookies with requests (for CSRF)
 })
 
 // Request interceptor
@@ -18,8 +27,17 @@ api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const { tokens } = useAuthStore.getState()
     
+    // Add JWT token if available
     if (tokens?.access) {
       config.headers.Authorization = `Bearer ${tokens.access}`
+    }
+    
+    // Add CSRF token for non-GET requests
+    if (config.method && !['get', 'head', 'options'].includes(config.method.toLowerCase())) {
+      const csrfToken = getCookie('csrftoken')
+      if (csrfToken) {
+        config.headers['X-CSRFToken'] = csrfToken
+      }
     }
     
     return config
@@ -36,6 +54,9 @@ api.interceptors.response.use(
   },
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
+    
+    // Check if we should skip error toast
+    const skipErrorToast = originalRequest?.headers?.['X-Skip-Error-Toast'] === 'true'
 
     // Handle 401 Unauthorized
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -63,28 +84,36 @@ api.interceptors.response.use(
           // Refresh failed, logout user
           clearAuth()
           window.location.href = '/login'
-          toast.error('Session expired. Please login again.')
+          if (!skipErrorToast) {
+            toast.error('Session expired. Please login again.')
+          }
           return Promise.reject(refreshError)
         }
       } else {
         // No refresh token, logout
         clearAuth()
         window.location.href = '/login'
-        toast.error('Please login to continue.')
+        if (!skipErrorToast) {
+          toast.error('Please login to continue.')
+        }
       }
     }
 
-    // Handle other errors
-    if (error.response?.status === 403) {
-      toast.error('You do not have permission to perform this action.')
-    } else if (error.response?.status === 404) {
-      toast.error('Resource not found.')
-    } else if (error.response?.status === 500) {
-      toast.error('Server error. Please try again later.')
-    } else if (error.code === 'ECONNABORTED') {
-      toast.error('Request timeout. Please check your connection.')
-    } else if (!error.response) {
-      toast.error('Network error. Please check your connection.')
+    // Handle other errors (but don't show toast for validation errors - let component handle it)
+    if (!skipErrorToast) {
+      if (error.response?.status === 403) {
+        toast.error('You do not have permission to perform this action.')
+      } else if (error.response?.status === 404) {
+        toast.error('Resource not found.')
+      } else if (error.response?.status === 500) {
+        toast.error('Server error. Please try again later.')
+      } else if (error.code === 'ECONNABORTED') {
+        toast.error('Request timeout. Please check your connection.')
+      } else if (!error.response && error.code !== 'ERR_CANCELED') {
+        // Only show network error if it's not a canceled request
+        console.error('Network error:', error)
+        toast.error('Network error. Please check your connection.')
+      }
     }
 
     return Promise.reject(error)
