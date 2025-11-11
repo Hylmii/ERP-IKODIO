@@ -106,3 +106,27 @@ secrets/
 # Uploads
 uploads/
 temp/
+
+# Android
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+*.hprof
+captures/
+.externalNativeBuild/
+.cxx/
+android-app/app/schemas/
+android-app/app/build/
+android-app/build/
+android-app/.gradle/
+android-app/local.properties
