@@ -59,6 +59,13 @@ ikodio-erp/
 │   │   ├── store/          # State management
 │   │   └── utils/          # Utility functions
 │   └── package.json
+├── android-app/             # Android Mobile App (NEW)
+│   ├── app/
+│   │   └── src/main/
+│   │       ├── java/        # Kotlin source code
+│   │       └── res/         # Resources (layouts, strings)
+│   ├── build.gradle.kts     # Build configuration
+│   └── README.md            # Android app documentation
 ├── docker/                  # Docker configurations
 ├── docs/                    # Documentation
 └── scripts/                 # Utility scripts
@@ -82,6 +89,14 @@ ikodio-erp/
 - Axios
 - Chart.js / Recharts
 - React Query
+
+### Mobile (Android)
+- Kotlin
+- MVVM Architecture
+- Room Database
+- Hilt (Dependency Injection)
+- Jetpack Compose / Material Design 3
+- Kotlin Coroutines & Flow
 
 ### DevOps
 - Docker & Docker Compose
@@ -154,7 +169,20 @@ npm run dev
 
 Frontend will be available at `http://localhost:3000`
 
-### 4. Using Docker (Recommended for Production)
+### 4. Android App Setup
+
+```bash
+cd android-app
+
+# Open in Android Studio
+# - File > Open > Select android-app directory
+# - Wait for Gradle sync to complete
+# - Run on emulator or physical device
+```
+
+See [android-app/README.md](./android-app/README.md) for detailed Android setup instructions.
+
+### 5. Using Docker (Recommended for Production)
 
 ```bash
 # Build and run all services
@@ -291,11 +319,13 @@ For support and questions:
 ## 🗺️ Roadmap
 
 - [x] Phase 1: Project setup and core architecture
-- [ ] Phase 2: Core modules (HR, Project, Finance)
-- [ ] Phase 3: Supporting modules (CRM, Asset, Helpdesk, DMS)
-- [ ] Phase 4: Analytics and BI
-- [ ] Phase 5: Mobile app
-- [ ] Phase 6: Advanced features (AI/ML integration)
+- [x] Phase 2: Core modules (HR, Project, Finance) - Backend
+- [x] Phase 3: Supporting modules (CRM, Asset, Helpdesk, DMS) - Backend
+- [x] Phase 4: Frontend Development (React)
+- [x] Phase 5: Mobile app foundation (Android) - **NEW**
+- [ ] Phase 6: Complete mobile app features
+- [ ] Phase 7: Analytics and BI
+- [ ] Phase 8: Advanced features (AI/ML integration)
 
 ---
 

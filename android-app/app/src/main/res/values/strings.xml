@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Ikodio Employee Manager</string>
+    
+    <!-- General -->
+    <string name="ok">OK</string>
+    <string name="cancel">Batal</string>
+    <string name="save">Simpan</string>
+    <string name="delete">Hapus</string>
+    <string name="edit">Edit</string>
+    <string name="search">Cari</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Urutkan</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="loading">Memuat…</string>
+    <string name="error">Error</string>
+    <string name="success">Berhasil</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_employees">Karyawan</string>
+    <string name="nav_attendance">Absensi</string>
+    <string name="nav_leave">Cuti</string>
+    <string name="nav_profile">Profil</string>
+    
+    <!-- Auth -->
+    <string name="login">Masuk</string>
+    <string name="logout">Keluar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Ingat saya</string>
+    <string name="forgot_password">Lupa password?</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="total_employees">Total Karyawan</string>
+    <string name="active_employees">Karyawan Aktif</string>
+    <string name="today_attendance">Absensi Hari Ini</string>
+    <string name="quick_actions">Aksi Cepat</string>
+    
+    <!-- Employee -->
+    <string name="employee_list">Daftar Karyawan</string>
+    <string name="add_employee">Tambah Karyawan</string>
+    <string name="edit_employee">Edit Karyawan</string>
+    <string name="employee_details">Detail Karyawan</string>
+    <string name="employee_id">ID Karyawan</string>
+    <string name="full_name">Nama Lengkap</string>
+    <string name="phone_number">Nomor Telepon</string>
+    <string name="position">Posisi/Jabatan</string>
+    <string name="department">Departemen</string>
+    <string name="salary">Gaji</string>
+    <string name="date_of_joining">Tanggal Bergabung</string>
+    <string name="address">Alamat</string>
+    <string name="photo">Foto</string>
+    <string name="active">Aktif</string>
+    <string name="inactive">Tidak Aktif</string>
+    
+    <!-- Attendance -->
+    <string name="check_in">Check In</string>
+    <string name="check_out">Check Out</string>
+    <string name="attendance_history">Riwayat Absensi</string>
+    <string name="attendance_status">Status Absensi</string>
+    <string name="present">Hadir</string>
+    <string name="permission">Izin</string>
+    <string name="sick">Sakit</string>
+    <string name="absent">Alfa</string>
+    
+    <!-- Leave -->
+    <string name="leave_request">Pengajuan Cuti</string>
+    <string name="leave_type">Jenis Cuti</string>
+    <string name="leave_annual">Cuti</string>
+    <string name="leave_sick">Sakit</string>
+    <string name="leave_permission">Izin</string>
+    <string name="start_date">Tanggal Mulai</string>
+    <string name="end_date">Tanggal Selesai</string>
+    <string name="reason">Alasan</string>
+    <string name="leave_status">Status</string>
+    <string name="pending">Menunggu</string>
+    <string name="approved">Disetujui</string>
+    <string name="rejected">Ditolak</string>
+    
+    <!-- Department -->
+    <string name="department_list">Daftar Departemen</string>
+    <string name="add_department">Tambah Departemen</string>
+    <string name="department_name">Nama Departemen</string>
+    <string name="department_code">Kode Departemen</string>
+    <string name="manager_name">Nama Manager</string>
+    
+    <!-- Validation Messages -->
+    <string name="error_field_required">Field ini wajib diisi</string>
+    <string name="error_invalid_email">Format email tidak valid</string>
+    <string name="error_invalid_phone">Format nomor telepon tidak valid</string>
+    <string name="error_min_length">Minimal %d karakter</string>
+    <string name="error_max_length">Maksimal %d karakter</string>
+    
+    <!-- Success Messages -->
+    <string name="success_employee_added">Karyawan berhasil ditambahkan</string>
+    <string name="success_employee_updated">Karyawan berhasil diperbarui</string>
+    <string name="success_employee_deleted">Karyawan berhasil dihapus</string>
+    <string name="success_check_in">Check in berhasil</string>
+    <string name="success_check_out">Check out berhasil</string>
+    
+    <!-- Error Messages -->
+    <string name="error_loading_data">Gagal memuat data</string>
+    <string name="error_saving_data">Gagal menyimpan data</string>
+    <string name="error_deleting_data">Gagal menghapus data</string>
+    <string name="error_network">Tidak ada koneksi internet</string>
+    <string name="error_unknown">Terjadi kesalahan</string>
+    
+    <!-- Empty States -->
+    <string name="empty_employees">Belum ada data karyawan</string>
+    <string name="empty_attendance">Belum ada data absensi</string>
+    <string name="empty_leave">Belum ada pengajuan cuti</string>
+    <string name="empty_departments">Belum ada data departemen</string>
+    
+    <!-- Confirmation -->
+    <string name="confirm_delete">Apakah Anda yakin ingin menghapus?</string>
+    <string name="confirm_logout">Apakah Anda yakin ingin keluar?</string>
